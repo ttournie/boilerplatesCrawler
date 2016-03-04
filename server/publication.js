@@ -32,9 +32,10 @@ Meteor.publish("search", function () {
         var searchs = [];
 
         _.each(search_result['items'], function(linetest) {
-
+            var repo = linetest['repository'];
             var line = { name: linetest['name'],
-                url: linetest['html_url']
+                url: linetest['html_url'],
+                repository: repo['name']
             };
             searchs.push(line);
         });
