@@ -1,0 +1,12 @@
+<head>
+    <title>boilerplatesCrawler</title>
+</head>
+
+<template name="index">
+   <h1> Welcome to Boilerplates Crawler</h1>
+    <ul>
+        {{#each items}}
+        <li><a href="{{url}}">{{name}}</a></li>
+        {{/each}}
+    </ul>
+</template>

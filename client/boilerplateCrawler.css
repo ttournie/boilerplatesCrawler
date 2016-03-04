@@ -1,0 +1,22 @@
+.checked{
+	text-decoration:line-through;
+}
+
+.container-header {
+	max-width: 719px;
+	margin: 0 auto;
+}
+
+ul.nav-tabs > li.active-signin > a {
+	border: 1px solid #e5e5e5;
+	border-left: none;
+	border-top: none;
+	border-bottom-color: transparent;
+	-webkit-border-radius: 5px 0px 0px 0px;
+	-moz-border-radius: 5px 0px 0px 0px;;
+	border-radius: 5px 0px 0px 0px;;
+}
+
+ul.task-list {
+	list-style: none;
+}
