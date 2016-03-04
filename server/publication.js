@@ -3,8 +3,8 @@ Meteor.publish("search", function () {
 
     var Github = Meteor.npmRequire('github');
     var github = new GitHub({
-        version: "3.0.0", // required
-        timeout: 5000     // optional
+        version: "3.0.0",
+        timeout: 5000
     });
 
     if(this.userId) {
@@ -34,7 +34,7 @@ Meteor.publish("search", function () {
         _.each(search_result['items'], function(linetest) {
 
             var line = { name: linetest['name'],
-                url: linetest['html_url'],
+                url: linetest['html_url']
             };
             searchs.push(line);
         });
@@ -42,6 +42,8 @@ Meteor.publish("search", function () {
         _.each(searchs, function(line) {
             self.added('search', Random.id(), line);
         });
+
+
 
         self.ready();
 
