@@ -1,0 +1,28 @@
+<head>
+    <title>GistsCrawler</title>
+</head>
+
+<template name="gists">
+    <h1> Welcome to Gists Crawler</h1>
+    {{#if currentUser}}
+    <h2>Wunderkraut Gists</h2>
+
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        {{#each items}}
+                        <li><a href="{{gistsUrl}}">{{gistsDesc}}</a> - {{gistsUser}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{else}}
+    <h2>Please login or register to see the magic happend.</h2>
+    {{/if}}
+</template>

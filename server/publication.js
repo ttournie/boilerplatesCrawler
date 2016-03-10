@@ -63,3 +63,56 @@ Meteor.publish("search", function () {
 
     }
 });
+
+Meteor.publish("gists", function () {
+    var self = this;
+
+    var Github = Meteor.npmRequire('github');
+    var github = new GitHub({
+        version: "3.0.0",
+        timeout: 5000
+    });
+
+    if(this.userId) {
+        var user = Meteor.users.findOne(this.userId);
+        var acount_info = Accounts.loginServiceConfiguration.findOne({
+            service: 'github',
+        });
+
+        var tokken = user.services.github.accessToken;
+
+        github.authenticate({
+            type: "oauth",
+            token: tokken,
+        });
+
+        var nodeone_members = github.orgs.getMembers({
+            org: "nodeone"
+        });
+
+        var nodeone_members_list = [];
+        var nodeone_members_gists = [];
+
+        _.each(nodeone_members, function(linetest) {
+            var nodeone_member_gists = github.gists.getFromUser({
+                user: linetest['login']
+            });
+
+            _.each(nodeone_member_gists, function(member_gist) {
+                var line = {
+                    gistsDesc: member_gist['description'],
+                    gistsUser: linetest['login'],
+                    gistsUrl: member_gist['html_url'],
+                };
+                nodeone_members_gists.push(line);
+            });
+        });
+
+        _.each(nodeone_members_gists, function(line) {
+            self.added('gists', Random.id(), line);
+        });
+
+        self.ready();
+
+    }
+});

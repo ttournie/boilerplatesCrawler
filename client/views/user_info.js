@@ -2,7 +2,6 @@
 Template.user_loggedin.helpers({
     // get the current user.
     user: function () {
-        console.log(Meteor.user());
         return  Meteor.user();
     }
 });
