@@ -33,8 +33,21 @@ Meteor.publish("search", function () {
 
         _.each(search_result['items'], function(linetest) {
             var repo = linetest['repository'];
-            var line = { name: linetest['name'],
-                url: linetest['html_url'],
+
+            // Create a link to folder, not to file.
+            var htlm_url = linetest['html_url']
+            var htlm_array = htlm_url.split('/');
+            htlm_array.pop();
+            htlm_url = htlm_array.join('/');
+
+            //remove extention from name
+            var name = linetest['name']
+            var name_array = name.split('.');
+            name = name_array[0];
+
+
+            var line = { name: name,
+                url: htlm_url,
                 repository: repo['name']
             };
             searchs.push(line);
